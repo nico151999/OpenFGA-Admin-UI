@@ -1,0 +1,15 @@
+[install]
+# Use exact versions from lockfile
+frozen-lockfile = false
+
+[run]
+# Silence extra output
+silent = false
+
+[install.cache]
+# Cache packages
+dir = "~/.bun/install/cache"
+
+[install.lockfile]
+# Save the lockfile
+save = true

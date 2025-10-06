@@ -1,0 +1,52 @@
+{
+  "name": "openfga-admin-ui",
+  "version": "0.1.0",
+  "private": true,
+  "description": "OpenFGA Admin Console - A reusable web UI for managing OpenFGA stores, models, and tuples",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "start": "./scripts/dev.sh",
+    "start:open": "./scripts/dev.sh --open",
+    "dev": "bun run --filter '*' dev",
+    "dev:ui": "bun run --cwd packages/ui dev",
+    "dev:gateway": "bun run --cwd packages/gateway dev",
+    "build": "bun run build:shared && bun run build:gateway && bun run build:ui",
+    "build:shared": "bun run --cwd packages/shared build",
+    "build:ui": "bun run --cwd packages/ui build",
+    "build:gateway": "bun run --cwd packages/gateway build",
+    "lint": "biome check .",
+    "lint:fix": "biome check --write .",
+    "format": "biome format --write .",
+    "typecheck": "bun run --cwd packages/ui typecheck && bun run --cwd packages/gateway typecheck",
+    "test": "bun test",
+    "clean": "rm -rf node_modules packages/*/node_modules packages/*/dist",
+    "openfga:setup": "./scripts/setup-openfga.sh",
+    "openfga:stop": "./scripts/stop-openfga.sh",
+    "openfga:logs": "tail -f .openfga.log",
+    "depcheck": "depcheck --ignore-patterns=\"dist,*.log\"",
+    "knip": "knip",
+    "outdated": "bun outdated",
+    "check": "bun run lint && bun run format && bun run typecheck && bun run depcheck && bun run knip && bun run outdated"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.3.12",
+    "depcheck": "^1.4.7",
+    "knip": "^5.82.1",
+    "typescript": "^5.9.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-org/openfga-admin-ui.git"
+  },
+  "keywords": [
+    "openfga",
+    "authorization",
+    "admin",
+    "console",
+    "rbac",
+    "fga"
+  ],
+  "license": "Apache-2.0"
+}
