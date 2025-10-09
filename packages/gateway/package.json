@@ -1,0 +1,26 @@
+{
+  "name": "@openfga-admin/gateway",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "src/index.ts",
+  "scripts": {
+    "dev": "bun run --watch src/index.ts",
+    "build": "bun build src/index.ts --outdir dist --target node",
+    "start": "bun run src/index.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "bun test",
+    "clean": "rm -rf dist node_modules"
+  },
+  "dependencies": {
+    "@openfga-admin/shared": "workspace:*",
+    "@openfga/syntax-transformer": "^0.2.0",
+    "hono": "^4.11.5",
+    "pino": "^10.3.0",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "typescript": "^5.9.3"
+  }
+}
