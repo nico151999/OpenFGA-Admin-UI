@@ -1,0 +1,78 @@
+model
+  schema 1.1
+
+type user
+
+type platform
+  relations
+    define admin: [user] or super_admin
+    define can_manage_agents: admin
+    define can_manage_groups: admin
+    define can_manage_plans: admin
+    define can_manage_users: admin
+    define member: [user, user with non_expired_grant] or admin
+    define super_admin: [user]
+
+type group
+  relations
+    define member: [user] and member from platform
+    define platform: [platform]
+
+type plan
+  relations
+    define platform: [platform]
+    define subscriber: [user, group#member] and member from platform
+
+type feature
+  relations
+    define associated_plan: [plan]
+    define associated_platform: [platform]
+    define member: subscriber from associated_plan and member from associated_platform
+
+type agent
+  relations
+    define can_delete: [user] or member from platform or owner or admin from platform
+    define can_edit: [user, group#member] or member from platform or owner or admin from platform
+    define can_list: listed_publicly or listed_to or entitled or owner or admin from platform
+    define can_publish: [user] or member from platform or owner or admin from platform
+    define can_start_session: listed_publicly or entitled or owner or admin from platform
+    define entitled: subscriber from required_plan
+    define listed_publicly: [user:*]
+    define listed_to: [user, group#member] and member from platform
+    define owner: [user] and member from platform
+    define platform: [platform]
+    define required_plan: [plan]
+
+type session
+  relations
+    define agent: [agent]
+    define can_chat: owner or participant or can_start_session from agent
+    define can_delete: owner or can_delete from agent or admin from platform
+    define can_view: owner or participant
+    define owner: [user] and member from platform
+    define participant: [user, group#member] and member from platform
+    define platform: [platform]
+
+type knowledge_base
+  relations
+    define can_delete: owner or admin from platform or super_admin from platform
+    define can_edit: editor or owner or admin from platform or super_admin from platform
+    define can_link_agent: linker or owner or admin from platform or super_admin from platform
+    define can_view: viewer or editor or owner or admin from platform or super_admin from platform
+    define editor: [user, group#member] or owner
+    define linked_agent: [agent]
+    define linker: [user, group#member] or owner
+    define owner: [user]
+    define platform: [platform]
+    define viewer: [user, group#member] or owner
+
+type file
+  relations
+    define can_manage: can_delete from parent
+    define can_view: can_view from parent
+    define parent: [knowledge_base]
+
+condition non_expired_grant(current_time: timestamp, end_time: timestamp, start_time: timestamp) {
+  current_time < end_time && current_time >= start_time
+}
+
