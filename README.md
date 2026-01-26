@@ -2,7 +2,13 @@
 
 You can think of this as the UI Layer for OpenFGA that gives Admins the ability to manage it without much knowledge about APIs or CLI
 
+The project was created an Admin UI for OpenFGA, The main goal is that the UI is Dynamic and it changes as per your OpenFGA Model, Then you can Easily Add users 
+
+So it is built because we constantly struggling with managing permissions in our applications. we tried building admin UIs multiple times, but every time the OpenFGA model changed, we had to rework the UI layer to match it one way or another.
+
 It do have reusable web UI components for managing OpenFGA stores, authorization models, and relationship tuples.
+
+<img width="2557" height="1156" alt="Screenshot 2026-01-26 at 5 03 10 PM" src="https://github.com/user-attachments/assets/7c28a0f9-0aa5-46e3-8514-6d66385ce168" />
 
 ## What You Can Do with this UI
 
@@ -92,6 +98,14 @@ NODE_ENV=development
           React Query Cache
 ```
 
-## License
+## Screenshots
 
-Apache-2.0
+<img width="2552" height="1157" alt="Screenshot 2026-01-26 at 5 01 33 PM" src="https://github.com/user-attachments/assets/4e7bec20-3ff1-4554-8957-5a4306e3a7c5" />
+<img width="2551" height="962" alt="Screenshot 2026-01-26 at 5 01 48 PM" src="https://github.com/user-attachments/assets/67bae2c8-3667-48a2-bf46-1fae41044aa0" />
+<img width="2555" height="1155" alt="Screenshot 2026-01-26 at 5 02 05 PM" src="https://github.com/user-attachments/assets/bf04b30c-000e-44bc-97d1-353fedfc44e4" />
+<img width="2557" height="1141" alt="Screenshot 2026-01-26 at 5 02 20 PM" src="https://github.com/user-attachments/assets/52662f20-b994-4fa9-8fd3-7e1037a12793" />
+<img width="2558" height="1147" alt="Screenshot 2026-01-26 at 5 02 27 PM" src="https://github.com/user-attachments/assets/16829e08-257c-4670-bb33-eba11d19288d" />
+<img width="2557" height="1153" alt="Screenshot 2026-01-26 at 5 02 52 PM" src="https://github.com/user-attachments/assets/767dfc86-6419-4edc-8a59-ecae14d25a33" />
+<img width="2556" height="1156" alt="Screenshot 2026-01-26 at 5 03 01 PM" src="https://github.com/user-attachments/assets/dd6a472e-3ffa-4a94-affc-e91b532ba007" />
+
+
