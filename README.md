@@ -1,11 +1,39 @@
 # OpenFGA Admin Console
 
-A reusable web UI for managing OpenFGA stores, authorization models, and relationship tuples. Built with React, Ant Design, Hono, and Bun.
+You can think of this as the UI Layer for OpenFGA that gives Admins the ability to manage it without much knowledge about APIs or CLI
 
-## Prerequisites
+It do have reusable web UI components for managing OpenFGA stores, authorization models, and relationship tuples.
 
-- [Bun](https://bun.sh/) >= 1.0.0
-- An OpenFGA instance running (local or remote)
+## What You Can Do with this UI
+
+Connect to OpenFGA: You can connect to any OpenFGA instance (local or remote) and manage multiple stores from a single interface.
+
+Dashboard: Get an overview of everything about your OpenFGA (stores, models, and tuple counts) .
+
+Model Browser and Model Editor where you can:
+- Visualize your authorization model as an interactive graph
+- Understand relationships between types and permissions at a glance
+- Write and edit authorization models using the OpenFGA DSL
+- Syntax highlighting and validation
+- Compare model versions with visual diff
+
+Tuple Manager:
+- Create, view, and delete relationship tuples
+- Search and filter tuples by type, object, or user
+- Bulk operations support
+
+Access Explorer:
+- Test authorization queries (`check`, `list-objects`, `list-users`)
+- Debug access decisions in real-time
+- Understand why access is granted or denied
+
+Hierarchy Manager & Grouped Permissions:
+- Manage hierarchical relationships (e.g., org → team → user)
+- Visual tree view of your data hierarchy
+
+OpenFGA Changes Feed:
+- View audit log of all changes to your authorization data
+- Track who changed what and when
 
 ## Quick Start
 
@@ -33,42 +61,6 @@ openfga-admin-ui/
 ├── package.json     # Root workspace config
 └── tsconfig.base.json
 ```
-
-## Scripts
-
-| Command | Description |
-|---------|-------------|
-| `bun run dev` | Start both UI and gateway in development mode |
-| `bun run dev:ui` | Start UI development server |
-| `bun run dev:gateway` | Start gateway with hot reload |
-| `bun run build` | Build all packages |
-| `bun run lint` | Run Biome linter |
-| `bun run lint:fix` | Fix linting issues |
-| `bun run format` | Format code with Biome |
-| `bun run typecheck` | Run TypeScript type checking |
-| `bun test` | Run tests |
-
-## Tech Stack
-
-### Frontend (`packages/ui`)
-- **React 18** - UI framework
-- **Ant Design 5** - Component library
-- **React Router 6** - Routing
-- **TanStack Query** - Server state management
-- **Zustand** - Client state management
-- **Monaco Editor** - Code editors for DSL/JSON
-- **Vite** - Build tool
-
-### Backend (`packages/gateway`)
-- **Hono** - Fast web framework
-- **Bun** - JavaScript runtime
-- **Zod** - Schema validation
-- **Pino** - Logging
-
-### Tooling
-- **Bun** - Package manager and runtime
-- **Biome** - Linting and formatting
-- **TypeScript** - Type safety
 
 ## Configuration
 
@@ -99,20 +91,6 @@ NODE_ENV=development
           Zustand State
           React Query Cache
 ```
-
-## Development
-
-### Adding a New Page
-
-1. Create page component in `packages/ui/src/pages/`
-2. Add route in `packages/ui/src/App.tsx`
-3. Update manifest in `packages/gateway/src/routes/console.ts`
-
-### Adding a New API Endpoint
-
-1. Add route in `packages/gateway/src/routes/`
-2. Register in `packages/gateway/src/index.ts`
-3. Add types in `packages/shared/src/types/`
 
 ## License
 
