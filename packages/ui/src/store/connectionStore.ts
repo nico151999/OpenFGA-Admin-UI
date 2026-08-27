@@ -34,6 +34,9 @@ interface ConnectionState {
   isConnected: boolean;
   activeProfileId: string | null;
 
+  // Default OpenFGA URL from gateway env
+  defaultOpenfgaUrl: string | null;
+
   // Profiles (stored locally and synced to gateway)
   profiles: ConnectionProfile[];
 
@@ -77,6 +80,7 @@ export const useConnectionStore = create<ConnectionState>()(
       // Connection state
       isConnected: false,
       activeProfileId: null,
+      defaultOpenfgaUrl: null,
       profiles: [],
       recentItems: [],
 
@@ -215,6 +219,7 @@ export const useConnectionStore = create<ConnectionState>()(
             recentItems: config.recentItems,
             activeProfileId: config.activeProfileId,
             isConnected: config.isConnected,
+            defaultOpenfgaUrl: config.defaultOpenfgaUrl || null,
             _isSyncing: false,
           });
         } catch (error) {

@@ -1,0 +1,16 @@
+apiVersion: v2
+name: openfga-admin-ui
+description: OpenFGA Admin Console - A web UI for managing OpenFGA stores, models, and tuples
+type: application
+version: 0.1.0
+appVersion: "0.1.0"
+home: https://github.com/yehia2amer/OpenFGA-Admin-UI
+sources:
+  - https://github.com/yehia2amer/OpenFGA-Admin-UI
+maintainers:
+  - name: openfga
+keywords:
+  - openfga
+  - authorization
+  - admin
+  - console

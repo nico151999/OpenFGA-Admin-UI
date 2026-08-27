@@ -1,6 +1,6 @@
 import type { ConnectionProfile } from '@store/connectionStore';
 
-const GATEWAY_URL = import.meta.env.VITE_GATEWAY_URL || 'http://localhost:4000';
+const GATEWAY_URL = import.meta.env.VITE_GATEWAY_URL || '';
 
 export interface AppConfig {
   version: number;
@@ -12,6 +12,7 @@ export interface AppConfig {
   }[];
   activeProfileId: string | null;
   isConnected: boolean;
+  defaultOpenfgaUrl?: string;
   lastUpdated?: string;
 }
 

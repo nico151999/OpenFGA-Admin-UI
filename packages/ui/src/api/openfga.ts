@@ -14,7 +14,7 @@ import type {
 import { useConnectionStore } from '@store/connectionStore';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
-const GATEWAY_URL = import.meta.env.VITE_GATEWAY_URL || 'http://localhost:4000';
+const GATEWAY_URL = import.meta.env.VITE_GATEWAY_URL || '';
 
 // Helper to get auth headers
 function useApiHeaders() {

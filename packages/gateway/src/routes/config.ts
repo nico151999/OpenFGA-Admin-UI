@@ -3,6 +3,7 @@ import { homedir } from 'node:os';
 import { join } from 'node:path';
 import { Hono } from 'hono';
 import { z } from 'zod';
+import { config } from '../config';
 import { logger } from '../utils/logger';
 
 // Schema for connection profile
@@ -113,8 +114,12 @@ export const configRoutes = new Hono();
  */
 configRoutes.get('/', (c) => {
   try {
-    const config = readConfig();
-    return c.json(config);
+    const appConfig = readConfig();
+    const configWithDefaults = {
+      ...appConfig,
+      defaultOpenfgaUrl: config.defaultOpenfgaUrl,
+    };
+    return c.json(configWithDefaults);
   } catch (error) {
     logger.error({ error }, 'Failed to get config');
     return c.json({ error: 'Failed to read config' }, 500);

@@ -53,8 +53,16 @@ export default function ConnectionPage() {
   const navigate = useNavigate();
   const { message } = App.useApp();
 
-  const { profiles, addProfile, deleteProfile, connect } = useConnectionStore();
+  const { profiles, addProfile, deleteProfile, connect, defaultOpenfgaUrl } = useConnectionStore();
   useTestConnection(); // Initialize hook for availability
+
+  // Update form URL when defaultOpenfgaUrl loads from gateway
+  useEffect(() => {
+    if (defaultOpenfgaUrl && formValues.openfgaApiUrl === 'http://localhost:8080') {
+      setFormValues((prev) => ({ ...prev, openfgaApiUrl: defaultOpenfgaUrl }));
+      form.setFieldValue('openfgaApiUrl', defaultOpenfgaUrl);
+    }
+  }, [defaultOpenfgaUrl]);
 
   // Auto-discover stores when URL changes
   const {

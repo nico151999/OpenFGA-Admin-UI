@@ -1,0 +1,33 @@
+{{- if .Values.gatewayRoute.enabled -}}
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: {{ include "openfga-admin-ui.fullname" . }}
+  labels:
+    {{- include "openfga-admin-ui.labels" . | nindent 4 }}
+spec:
+  {{- with .Values.gatewayRoute.parentRefs }}
+  parentRefs:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  {{- with .Values.gatewayRoute.hostnames }}
+  hostnames:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  rules:
+    {{- range .Values.gatewayRoute.rules }}
+    - {{- if .matches }}
+      matches:
+        {{- toYaml .matches | nindent 8 }}
+      {{- end }}
+      {{- if .filters }}
+      filters:
+        {{- toYaml .filters | nindent 8 }}
+      {{- end }}
+      backendRefs:
+        {{- range .backendRefs }}
+        - name: {{ .name | default (include "openfga-admin-ui.fullname" $) }}
+          port: {{ .port | default $.Values.service.port }}
+        {{- end }}
+    {{- end }}
+{{- end }}
