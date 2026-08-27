@@ -1,0 +1,12 @@
+node_modules
+packages/*/node_modules
+packages/*/dist
+.git
+.github
+.openfga
+*.log
+.env
+.env.*
+dist
+coverage
+tmp

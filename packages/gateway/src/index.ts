@@ -1,4 +1,6 @@
+import path from 'node:path';
 import { Hono } from 'hono';
+import { serveStatic } from 'hono/bun';
 import { cors } from 'hono/cors';
 import { logger as honoLogger } from 'hono/logger';
 import { config } from './config';
@@ -68,6 +70,17 @@ app.route('/api/config', configRoutes);
 app.route('/api/console', consoleRoutes);
 app.route('/api/console/hierarchy', hierarchyRoutes);
 app.route('/api/openfga', proxyRoutes);
+
+// Serve static UI files (production)
+const uiDistPath = path.resolve(import.meta.dir, '../../../packages/ui/dist');
+const uiDist = Bun.file(path.join(uiDistPath, 'index.html'));
+
+if (await uiDist.exists()) {
+  app.use('/assets/*', serveStatic({ root: uiDistPath }));
+  app.use('/*', serveStatic({ root: uiDistPath }));
+  // SPA fallback: non-file requests serve index.html
+  app.get('/*', serveStatic({ root: uiDistPath, path: 'index.html' }));
+}
 
 // Metrics endpoint
 app.get('/metrics', (c) => {
